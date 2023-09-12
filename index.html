@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <title>FireSignal</title>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="list" id="fire-list">
+            <h1 class="fire-title">Fires</h1>
+        </div>
+        <div id="position" class="position">Click location on Map.</div>
+        <button id="add-fire" class="add-fire hidden">Report Fire</button>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c&libraries=places&callback=initMap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@googlemaps/js-api-loader"></script>
+</body>
+</html>

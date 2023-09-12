@@ -1,0 +1,47 @@
+body {
+    text-align: center;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 85% 32.7%;
+}
+
+.map {
+    height: 100%;
+}
+
+.sidebar {
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+.fire-title {
+    font-size: 50px;
+    font-family: Arial;
+    padding: 5px;
+    color: blue;
+}
+
+.add-fire {
+    font-size: 25px;
+    font-family: Arial;
+    color: lightblue;
+    background-color: rgb(255, 0, 0);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.position {
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.hidden {
+    opacity: 0%;
+}
