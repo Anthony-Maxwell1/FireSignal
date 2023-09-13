@@ -2,6 +2,7 @@ const projectId = 'firesignal';
 const apiUrl = `https://datastore.googleapis.com/v1/projects/${projectId}:runQuery`
 let map, userPos, currPos
 let lastMarker = null
+let markers = []
 
 function initMap() {
     let socket = new WebSocket("ws://localhost:8080")
@@ -54,26 +55,40 @@ function initMap() {
             title: "Report Fire Here",
             icon: svgMarker
         });
+        console.log(marker)
         marker.setMap(map)
         lastMarker = marker
     })
 
+    const marker = new google.maps.Marker({
+        position: userPos,
+        title: "Fire"
+    });
+    marker.setMap(map)
+
     socket.onmessage = function(event) {
-        console.log(`[WS Message] Message Received from server: ${event.data}`)
         msg = JSON.parse(event.data)
-        print(Object.entries(msg))
-        Object.entries(msg).foreach((e) => {
-            console.log(e)
-            marker = new google.maps.Marker({
-                position: e,
-                title: "Fire"
-            });
-            marker.setMap(map)
-        })
+        if (msg['type'] == 'fires') {
+            for (e in msg['data']) {
+                loc = new google.maps.LatLng(msg['data'][e]['lat'], msg['data'][e]['lng'])
+                console.log(loc)
+                const marker = new google.maps.Marker({
+                    position: loc,
+                    title: "Fire",
+                    icon: 'fire.png'
+                });
+                marker.setMap(map)
+                console.log(marker)
+                markers.push(marker)
+                console.log(markers)
+            }
+        } else if (msg['type'] == 'msg') {
+            console.log(`[WS Message] Message Received from server: ${event.data['data']}`)
+        }
     }
 
     document.getElementById('add-fire').addEventListener('click', (event) => {
-        socket.send(currPos)
+        socket.send(JSON.stringify(currPos))
         document.getElementById('reported').innerText = 'Reported.'
     })
 
