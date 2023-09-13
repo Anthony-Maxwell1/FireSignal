@@ -2,3 +2,11 @@
 
 Made by Jarn Inventions,
 Supported by UpStep Industries.
+
+## What is FireSignal?
+
+Firesignal is an application where users can report fires which will help fire departments locate fires and the community avoid the fires.
+
+## How do I host it? [Devs]
+
+Make sure you have `node.js` installed. Then, in a terminal run `npm start`. You can then go to `localhost:3000`.
