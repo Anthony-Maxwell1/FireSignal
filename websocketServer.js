@@ -7,7 +7,7 @@ let data = JSON.parse(fs.readFileSync(fires))
 
 wss.on('connection', (ws) => {
     console.log('A client connected.');
-    ws.send()
+    ws.send(JSON.stringify({'type': 'fires', 'data': data}))
 
     ws.on('message', (message) => {
         if (typeof message === 'string') {
@@ -19,6 +19,7 @@ wss.on('connection', (ws) => {
             data[currIndex.toString()] = decodedMessage
             fs.writeFileSync(fires, JSON.stringify(data))
             console.log('Received message: ', decodedMessage);
+            ws.send('Reported Fire.')
         } else {
             console.log('Received unknown message type');
             console.log(message);

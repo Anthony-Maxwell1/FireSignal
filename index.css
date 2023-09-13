@@ -7,8 +7,6 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: 85% 32.7%;
 }
 
 .map {
@@ -37,11 +35,35 @@ body {
     margin: 10px;
 }
 
-.position {
+.reported {
     font-size: 20px;
     font-family: Arial;
 }
 
 .hidden {
     opacity: 0%;
+}
+
+#loading {
+    font-size: 40px;
+    font-family: Arial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+img {
+    width: 160px;
+    height: 160px;
+    margin-top: 20%;
+    padding: 10px;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    height: 100%;
 }
