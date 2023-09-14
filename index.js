@@ -1,14 +1,25 @@
-const projectId = 'firesignal';
+const projectId = `firesignal`;
 const apiUrl = `https://datastore.googleapis.com/v1/projects/${projectId}:runQuery`
 let map, userPos, currPos
 let lastMarker = null
 const markers = []
 
+function get_distance(pos1, pos2) {
+    var R = 3958.8;
+    var rlat1 = pos1.position.lat() * (Math.PI/180);
+    var rlat2 = pos2.position.lat() * (Math.PI/180);
+    var difflat = rlat2-rlat1;
+    var difflon = (pos2.position.lng()-pos1.position.lng()) * (Math.PI/180);
+
+    var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
+    return d;
+}
+
 function initMap() {
-    let socket = new WebSocket("ws://localhost:8080")
+    let socket = new WebSocket(`ws://localhost:8080`)
 
     socket.onopen = function(event) {
-        console.log('[WS Open] Successfully connected to server.')
+        console.log(`[WS Open] Successfully connected to server.`)
     }
 
     socket.onclose = function(event) {
@@ -21,10 +32,10 @@ function initMap() {
 
     socket.onerror = function(event) {
         console.log(`[WS Error] WebSocket encountered an error. Code: ${event.code}. Reason: ${event.reason}`)
-        document.getElementById('loading').innerHTML = "An Error has occured."
+        document.getElementById(`loading`).innerHTML = `An Error has occured.`
     }
 
-    map = new google.maps.Map(document.getElementById('map'), {zoom: 8})
+    map = new google.maps.Map(document.getElementById(`map`), {zoom: 8})
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -34,16 +45,16 @@ function initMap() {
         });
     }
 
-    map.addListener('click', (mapsMouseEvent) => {
+    map.addListener(`click`, (mapsMouseEvent) => {
         const position = mapsMouseEvent.latLng.toJSON()
         if (lastMarker) {
             lastMarker.setMap(null)
         }
         currPos = JSON.stringify(position)
-        document.getElementById('add-fire').classList.remove('hidden')
+        document.getElementById(`add-fire`).classList.remove(`hidden`)
         const svgMarker = {
-            path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-            fillColor: "blue",
+            path: `M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z`,
+            fillColor: `blue`,
             fillOpacity: 1,
             strokeWeight: 0,
             rotation: 30,
@@ -52,7 +63,7 @@ function initMap() {
         };
         const marker = new google.maps.Marker({
             position: position,
-            title: "Report Fire Here",
+            title: `Report Fire Here`,
             icon: svgMarker
         });
         console.log(marker)
@@ -62,39 +73,58 @@ function initMap() {
 
     const marker = new google.maps.Marker({
         position: userPos,
-        title: "Fire"
+        title: `Fire`
     });
     marker.setMap(map)
 
     socket.onmessage = function(event) {
         msg = JSON.parse(event.data)
-        if (msg['type'] == 'fires') {
-            for (const e in msg['data']) {
-                const lat = JSON.parse(msg['data'][e])['lat'];
-                const lng = JSON.parse(msg['data'][e])['lng'];
+        if (msg[`type`] == `fires`) {
+            for (const e in msg[`data`]) {
+                const lat = JSON.parse(msg[`data`][e])[`lat`];
+                const lng = JSON.parse(msg[`data`][e])[`lng`];
 
                 const loc = new google.maps.LatLng(lat, lng);
+                let distance = google.maps.geometry.spherical.computeDistanceBetween(userPos, loc);
+                console.log(distance)
+                const xhr = new XMLHttpRequest();
+                xhr.open(`GET`, `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c`);
+                xhr.send();
+                xhr.responseType = `json`;
+                xhr.onload = () => {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        const address = xhr.response;
+                        const fire = document.createElement(`div`)
+                        console.log(address)
+                        fire.classList.add(`fire`)
+                        fire.innerText = address['results'][0]['formatted_address'];
 
-                const marker = new google.maps.Marker({
-                    position: loc,
-                    title: "Fire",
-                    icon: 'fire.png'
-                });
+                        document.getElementById(`list`).appendChild(fire)
 
-                marker.setMap(map);
+                        const marker = new google.maps.Marker({
+                            position: loc,
+                            title: `Fire`,
+                            icon: `fire.png`
+                        });
 
-                markers.push(marker);
+                        marker.setMap(map);
+
+                        markers.push(marker);
+                    } else {
+                        console.log(`Error: ${xhr.status}`);
+                    }
+                };
             }
-        } else if (msg['type'] == 'msg') {
-            console.log(`[WS Message] Message Received from server: ${event.data['data']}`)
+        } else if (msg[`type`] == `msg`) {
+            console.log(`[WS Message] Message Received from server: ${event.data[`data`]}`)
         }
     }
 
-    document.getElementById('add-fire').addEventListener('click', (event) => {
+    document.getElementById(`add-fire`).addEventListener(`click`, (event) => {
         socket.send(JSON.stringify(currPos))
-        document.getElementById('reported').innerText = 'Reported.'
+        document.getElementById(`reported`).innerText = `Reported.`
     })
 
-    document.getElementById('loading').remove()
-    document.getElementById('main').classList.remove('hidden')
+    document.getElementById(`loading`).remove()
+    document.getElementById(`main`).classList.remove(`hidden`)
 }

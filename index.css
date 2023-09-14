@@ -1,21 +1,21 @@
-body {
-    text-align: center;
-}
-
 html,
 body {
+    text-align: center;
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #f0f3f4;
 }
 
 .map {
-    height: 100%;
+    height: 87%;
 }
 
 .sidebar {
-    height: 100%;
-    background-color: #eeeeee;
+    height: 87%;
+    background-color: #9e9e9e;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
 }
 
 .fire-title {
@@ -66,4 +66,22 @@ img {
     display: grid;
     grid-template-columns: 75% 25%;
     height: 100%;
+}
+
+.fire {
+    width: 70%;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: red;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.list {
+    width: 100%;
+    height: 70%;
+    vertical-align: middle;
+    overflow-y: scroll;
 }

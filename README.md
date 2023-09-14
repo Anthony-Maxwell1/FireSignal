@@ -9,4 +9,4 @@ Firesignal is an application where users can report fires which will help fire d
 
 ## How do I host it? [Devs]
 
-Make sure you have `node.js` installed. Then, in a terminal run `npm start`. You can then go to `localhost:3000`.
+Make sure you have `node.js` installed. If you havn't already, run `npm install` in a terminal at the folder. Then, run `npm start`. You can then go to `localhost:3000`.

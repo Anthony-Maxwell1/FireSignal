@@ -17,14 +17,14 @@
     <div id="main" class="hidden">
         <div id="map" class="map"></div>
         <div class="sidebar" id="sidebar">
-            <div class="list" id="fire-list">
-                <h1 class="fire-title">Fires</h1>
+            <h1 class="fire-title">Fires</h1>
+            <div class="list" id="list">
             </div>
             <div id="reported" class="reported"></div>
             <button id="add-fire" class="add-fire hidden">Report Fire</button>
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c&libraries=places&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c&libraries=places,geometry&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/@googlemaps/js-api-loader"></script>
 </body>
 </html>
