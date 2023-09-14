@@ -20,11 +20,17 @@ wss.on('connection', (ws) => {
             if (typeof decodedMessage === 'object' && decodedMessage !== null) {
                 currIndex += 1;
                 data[currIndex.toString()] = decodedMessage;
-                fs.writeFileSync(fires, JSON.stringify(data, null, 2));
+                fs.writeFileSync(fires, JSON.stringify(data, null, 2), 'utf-8');
                 console.log('Received valid JSON message:', decodedMessage);
                 ws.send(JSON.stringify({ 'type': 'msg', 'data': 'Reported Fire.' }));
             } else {
                 console.log('Received non-object JSON:', decodedMessage);
+                currIndex += 1;
+                data[currIndex.toString()] = decodedMessage;
+                console.log(data[currIndex.toString()])
+                console.log(JSON.stringify(data, null, 2))
+                fs.writeFileSync(fires, JSON.stringify(data, null, 2), 'utf-8');
+                ws.send(JSON.stringify({ 'type': 'msg', 'data': 'Reported Fire.' }));
             }
         } catch (error) {
             console.error('Error parsing JSON:', error);

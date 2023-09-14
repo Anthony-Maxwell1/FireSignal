@@ -2,7 +2,7 @@ const projectId = 'firesignal';
 const apiUrl = `https://datastore.googleapis.com/v1/projects/${projectId}:runQuery`
 let map, userPos, currPos
 let lastMarker = null
-let markers = []
+const markers = []
 
 function initMap() {
     let socket = new WebSocket("ws://localhost:8080")
@@ -69,18 +69,21 @@ function initMap() {
     socket.onmessage = function(event) {
         msg = JSON.parse(event.data)
         if (msg['type'] == 'fires') {
-            for (e in msg['data']) {
-                loc = new google.maps.LatLng(msg['data'][e]['lat'], msg['data'][e]['lng'])
-                console.log(loc)
+            for (const e in msg['data']) {
+                const lat = JSON.parse(msg['data'][e])['lat'];
+                const lng = JSON.parse(msg['data'][e])['lng'];
+
+                const loc = new google.maps.LatLng(lat, lng);
+
                 const marker = new google.maps.Marker({
                     position: loc,
                     title: "Fire",
                     icon: 'fire.png'
                 });
-                marker.setMap(map)
-                console.log(marker)
-                markers.push(marker)
-                console.log(markers)
+
+                marker.setMap(map);
+
+                markers.push(marker);
             }
         } else if (msg['type'] == 'msg') {
             console.log(`[WS Message] Message Received from server: ${event.data['data']}`)
