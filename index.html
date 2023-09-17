@@ -4,27 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://kit.fontawesome.com/facb860121.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <script src="index.js"></script>
     <title>FireSignal</title>
 </head>
-<body>
+    <body>
+        <div id="trailer">
+            <i id="trailer-icon" class="fa-solid fa-arrow-up-right"></i>
+        </div>
+
     <div id="loading">
         <img src="loading.gif">
         Loading...
     </div>
 
+    <div id="view-options" class="view-options hidden">
+        <button id="map-option" class="view-option interactable" onclick="mapView()" data-type="mapView">Map</button>
+        <button id="list-option" class="view-option interactable" onclick="listView()" data-type="listView">List</button>
+        <button id="options" class="fa-light fa-solid fa-caret-down options interactable" style="color: #ffffff;" onclick="toggleOptions()" data-type="options"></button>
+    </div>
+    <div id="dropdown-content" class="dropdown-content">
+        <p class="option">Color Scheme:</p>
+        <button onclick="swapPalette(0)" class="colour-palette interactable" style='background-image: url("Palettes/1.png");' data-type="colour-palette"></button>
+        <button onclick="swapPalette(1)" class="colour-palette interactable" style='background-image: url("Palettes/2.png");' data-type="colour-palette"></button>
+        <button onclick="swapPalette(2)" class="colour-palette interactable" style='background-image: url("Palettes/3.png");' data-type="colour-palette"></button>
+    </div>
+
     <div id="main" class="hidden">
         <div id="map" class="map"></div>
-        <div class="sidebar" id="sidebar">
-            <h1 class="fire-title">Fires</h1>
-            <div class="list" id="list">
-            </div>
-            <div id="reported" class="reported"></div>
-            <button id="add-fire" class="add-fire hidden">Report Fire</button>
-        </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c&libraries=places,geometry&callback=initMap"></script>
+
+    <p id="list-title" class="list-title hidden">Fires</p>
+    <div id="list" class="list hidden"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c&libraries=places&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/@googlemaps/js-api-loader"></script>
 </body>
 </html>

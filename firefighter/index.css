@@ -1,0 +1,234 @@
+:root {
+    --text: #54b6eb;
+    --background: #f5f6ff;
+    --primary: #051abd;
+    --secondary: #c8cffe;
+    --accent: #0722f2;
+    --font: "Nunito";
+}
+
+html,
+body {
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    font-family: var(--font);
+}
+
+.map {
+    height: 100%;
+}
+
+.view-options {
+    height: 5%;
+    background-color: var(--primary);
+}
+
+.fire-title {
+    font-size: 50px;
+    padding: 5px;
+    color: var(--text);
+}
+
+.add-fire {
+    font-size: 25px;
+    color: var(--text);
+    background-color: var(--accent);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    border-width: 0px;
+}
+
+.reported {
+    font-size: 20px;
+}
+
+.hidden {
+    opacity: 0%;
+    pointer-events: none;
+}
+
+#loading {
+    font-size: 40px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+img {
+    width: 160px;
+    height: 160px;
+    margin-top: 20%;
+    padding: 10px;
+}
+
+#main {
+    height: 95%;
+    position: absolute;
+    width: 100%;
+}
+
+.fire {
+    width: 70%;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: var(--accent);
+    color: var(--text);
+    display: inline-block;
+}
+
+.list {
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.view-option {
+    height: 100%;
+    width: 45%;
+    border-width: 0px;
+    background-color: var(--primary);
+    color: var(--text);
+    transition-duration: 500ms;
+
+    &:hover {
+        background-color: var(--accent);
+    }
+}
+
+#trailer {
+    height: 20px;
+    width: 20px;
+    background-color: var(--secondary);
+    border-radius: 20px;
+
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 10000;
+
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 500ms ease;
+
+    display: grid;
+    place-items: center;
+}
+
+body:hover > #trailer {
+    opacity: 1;
+}
+
+#trailer:not([data-type=""]) > #trailer-icon {
+    opacity: 1;
+}
+
+#trailer-icon {
+    font-size: 6px;
+    line-height: 4px;
+
+    opacity: 0;
+    transition: opacity 400ms ease;
+}
+
+.options {
+    background-color: var(--primary);
+    border-width: 0px;
+    width: 30px;
+}
+
+.list-title {
+    font-size: 30px;
+}
+
+.dropdown-content {
+    padding: 20px;
+    opacity: 0;
+    position: absolute;
+    background-color: var(--accent);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    height: 80%;
+    text-align: left;
+}
+
+.option {
+    font-size: 30px;
+    margin-top: 0px;
+    margin-left: 10px;
+    color: var(--text);
+}
+
+.dropdown-content.active {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.colour-palette {
+    margin-top: 0px;
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border-width: 0px;
+    transition: ease-out 300ms;
+
+    &:hover {
+        transform: scale(1.25);
+    }
+}
+
+form {
+    display: inline-flex;
+    width: 500px;
+    flex-direction: column;
+    align-self: center;
+}
+
+select, input {
+    height: 30px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+.sign-in {
+    position: absolute;
+    text-align: center;
+    align-content: center;
+    background-color: white;
+    box-shadow: 0px 0px 5px 5px var(--accent);
+    width: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.error {
+    width: 90%;
+    padding: 10px;
+    background-color: #ff00009c;
+    border-color: #ff0000;
+    box-shadow: 0px 0px 5px 5px #ff0000;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
