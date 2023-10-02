@@ -7,7 +7,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const dom_parser = new DOMParser();
 const err_empty = dom_parser.parseFromString('<div class="error">Username, Organization and Password cannot be blank.</div>', 'text/html').body.firstChild
 const err_invalid = dom_parser.parseFromString('<div class="error">Incorrect Username, Organization or Password.</div>', 'text/html').body.firstChild
-const sessionID = null
+const verifyButton = '<button class=`verify` onclick=verifyFire(<--fire-->)>TESTING</button>';
+let sessionID
 let map, userPos, currPos, lastMarker;
 let socket;
 const markers = [];
@@ -40,15 +41,6 @@ function distance_between(pos1, pos2) {
 async function initMap() {
     try {
         map = new google.maps.Map(document.getElementById(`map`), { zoom: 8 });
-        const svgMarker = {
-            path: "M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z",
-            fillColor: "red",
-            fillOpacity: 0.6,
-            strokeWeight: 0,
-            rotation: 0,
-            scale: 2,
-            anchor: new google.maps.Point(0, 20),
-        };
 
         // Promisify geolocation
         function getCurrentPosition() {
@@ -58,7 +50,6 @@ async function initMap() {
         }
 
         try {
-            // Get user's position
             const position = await getCurrentPosition();
             userPos = { 'lat': position.coords.latitude, 'lng': position.coords.longitude };
             console.log(userPos);
@@ -77,7 +68,7 @@ async function initMap() {
                 const marker = new google.maps.Marker({
                     position: position,
                     title: `Report Fire Here`,
-                    icon: svgMarker
+                    icon: { url: '../report_fire.svg', scaledSize: new google.maps.Size(50, 50) }
                 });
                 infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(addFire);
@@ -88,7 +79,8 @@ async function initMap() {
 
             const marker = new google.maps.Marker({
                 position: userPos,
-                title: `Fire`
+                title: `User Position`,
+                icon: { url: '../user_position.svg', scaledSize: new google.maps.Size(50, 50) }
             });
             marker.setMap(map);
         } catch (error) {
@@ -104,8 +96,8 @@ async function initMap() {
                 organization = urlParams.get('organization')
                 username = urlParams.get('username')
                 password = urlParams.get('password')
-                console.log(username, password)
-                if (username == '' || password == '' || organization == '') {
+                console.log(username, password, organization)
+                if (username == '' || password == '' || organization == '' || organization == null) {
                     document.getElementById('sign-in').classList.remove('hidden')
                     document.getElementById('sign-in').insertBefore(err_empty, document.getElementById('sign-in').firstChild)
                 } else {
@@ -137,8 +129,14 @@ async function initMap() {
             msg = JSON.parse(event.data);
             if (msg[`type`] == `fires`) {
                 for (const e in msg[`data`]) {
-                    const lat = JSON.parse(msg[`data`][e])[`lat`];
-                    const lng = JSON.parse(msg[`data`][e])[`lng`];
+                    const parsed = msg[`data`][e]
+                    console.log(parsed)
+                    const loc_ = JSON.parse(parsed['loc'])
+                    const lat = loc_[`lat`];
+                    const lng = loc_['lng']
+                    console.log(loc_)
+                    console.log(lat)
+                    console.log(lng)
 
                     const loc = new google.maps.LatLng(lat, lng);
                     console.log(userPos);
@@ -150,7 +148,7 @@ async function initMap() {
                     xhr.responseType = `json`;
                     xhr.onload = () => {
                         if (xhr.readyState == 4 && xhr.status == 200) {
-                            makeMarker(loc, xhr.response);
+                            makeMarker(parsed, loc, xhr.response, parsed['verified']);
                         } else {
                             console.log(`Error: ${xhr.status}`);
                         }
@@ -158,29 +156,44 @@ async function initMap() {
                 }
             } else if (msg[`type`] == `msg`) {
                 console.log(`[WS Message] Message Received from server: ${msg[`data`]}`);
+            } else if (msg[`type`] == `sign_in-success`) {
+                sessionID = msg['data']
+                document.getElementById('view-options').classList.remove('hidden')
+                mapView()
+            } else if (msg['type'] == `sign_in-fail`) {
+                document.getElementById('sign-in').classList.remove('hidden')
+                document.getElementById('sign-in').insertBefore(err_invalid, document.getElementById('sign-in').firstChild)
             }
         }
     } catch {
-        document.getElementById(`loading`).innerHTML = `<img src="error.png">
+        document.getElementById(`loading`).innerHTML = `<img src="../error.png">
         An Error has occurred. Check Developer Tools for more information.`;
     }
 }
 
-function makeMarker(loc, address) {
-    const fire = document.createElement(`div`);
+function makeMarker(fire_, loc, address, verified) {
+    console.log(verified)
     console.log(address);
+    console.log(fire_)
+    const fire = document.createElement(`div`);
     fire.classList.add(`fire`);
-    fire.innerText = address['results'][0]['formatted_address'];
+    console.log(verified == false)
+    fire.innerHTML += address['results'][0]['formatted_address'];
+    if (verified == false) { fire.innerHTML += verifyButton.replace('<--fire-->', JSON.stringify(fire_)) }
 
     const marker = new google.maps.Marker({
         position: loc,
-        title: `Fire`,
-        icon: `../fire.png`
+        title: `Report Fire Here`,
+        icon: { url: '../fire.svg', scaledSize: new google.maps.Size(50, 50) }
     });
 
     marker.setMap(map);
     markers.push(marker);
     document.getElementById('list').appendChild(fire)
+}
+
+function verifyFire(fire) {
+    socket.send(JSON.stringify({'client': 'firefighter', 'sessionID': sessionID, 'type': 'verify', 'data': {'fire': fire}}))
 }
 
 function reportfire() {

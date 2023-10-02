@@ -195,3 +195,13 @@ body:hover > #trailer {
 p {
     font-size: 5px;
 }
+
+#showUnverified {
+    height: 20px;
+    width: 20px;
+}
+
+label {
+    font-size: 25px;
+    color: var(--text);
+}

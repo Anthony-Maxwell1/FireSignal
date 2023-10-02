@@ -7,6 +7,7 @@ const palettes = [{'--text': '#54b6eb', '--background': '#f5f6ff', '--primary': 
 let map, userPos, currPos, lastView, lastMarker;
 let socket;
 const markers = [];
+const urlParams = new URLSearchParams(window.location.search);
 curr_interacting = false
 
 function distance_between(pos1, pos2) {
@@ -35,15 +36,6 @@ function distance_between(pos1, pos2) {
 
 async function initMap() {
     try {
-        const svgMarker = {
-            path: "M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z",
-            fillColor: "red",
-            fillOpacity: 1,
-            strokeWeight: 0,
-            rotation: 0,
-            scale: 0.05,
-            anchor: new google.maps.Point(0, 5),
-        };
         map = new google.maps.Map(document.getElementById(`map`), { zoom: 8 });
 
         // Promisify geolocation
@@ -73,7 +65,7 @@ async function initMap() {
                 const marker = new google.maps.Marker({
                     position: position,
                     title: `Report Fire Here`,
-                    icon: svgMarker
+                    icon: { url: '../report_fire.svg', scaledSize: new google.maps.Size(30, 30) }
                 });
                 infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(addFire);
@@ -84,7 +76,8 @@ async function initMap() {
 
             const marker = new google.maps.Marker({
                 position: userPos,
-                title: `Fire`
+                title: `User Position`,
+                icon: { url: '../user_position.svg', scaledSize: new google.maps.Size(50, 50) }
             });
             marker.setMap(map);
         } catch (error) {
@@ -117,25 +110,34 @@ async function initMap() {
             msg = JSON.parse(event.data);
             if (msg[`type`] == `fires`) {
                 console.log('hi');
+                console.log(msg['data'])
                 for (const e in msg[`data`]) {
-                    const lat = JSON.parse(msg[`data`][e])[`lat`];
-                    const lng = JSON.parse(msg[`data`][e])[`lng`];
+                    const parsed = msg[`data`][e]
+                    console.log(parsed)
+                    if ((urlParams.has('showUnverified')) ? true : parsed['verified'] == true) {
+                        const loc_ = JSON.parse(parsed['loc'])
+                        const lat = loc_[`lat`];
+                        const lng = loc_['lng']
+                        console.log(loc_)
+                        console.log(lat)
+                        console.log(lng)
 
-                    const loc = new google.maps.LatLng(lat, lng);
-                    console.log(userPos);
-                    let distance = distance_between(userPos, { 'lat': lat, 'lng': lng });
-                    console.log(distance);
-                    const xhr = new XMLHttpRequest();
-                    xhr.open(`GET`, `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c`);
-                    xhr.send();
-                    xhr.responseType = `json`;
-                    xhr.onload = () => {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            makeMarker(loc, xhr.response);
-                        } else {
-                            console.log(`Error: ${xhr.status}`);
-                        }
-                    };
+                        const loc = new google.maps.LatLng(lat, lng);
+                        console.log(userPos);
+                        let distance = distance_between(userPos, { 'lat': lat, 'lng': lng });
+                        console.log(distance);
+                        const xhr = new XMLHttpRequest();
+                        xhr.open(`GET`, `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBu6ozOeYmoHhXBZ6_ABKbs9tskz5sWE1c`);
+                        xhr.send();
+                        xhr.responseType = `json`;
+                        xhr.onload = () => {
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                makeMarker(loc, xhr.response);
+                            } else {
+                                console.log(`Error: ${xhr.status}`);
+                            }
+                        };
+                    }
                 }
             } else if (msg[`type`] == `msg`) {
                 console.log(`[WS Message] Message Received from server: ${msg[`data`]}`);
@@ -159,7 +161,7 @@ function makeMarker(loc, address) {
     const marker = new google.maps.Marker({
         position: loc,
         title: `Fire`,
-        icon: `fire.png`
+        icon: `fire.svg`
     });
 
     marker.setMap(map);
@@ -255,4 +257,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
             icon.className = getTrailerClass(interactable.dataset.type)
         }
     }
+
+    document.getElementById('showUnverified').addEventListener('input', (event) => {
+        let url = window.location.href;
+        if (urlParams.has('showUnverified')) {
+            url = url.replace('?showUnverified=true', '')
+            url = url.replace('&showUnverified=true', '')
+        } else {
+            if (url.indexOf('?') > -1){
+                url += '&showUnverified=true'
+            } else {
+                url += '?showUnverified=true'
+            }
+        }
+
+        window.location.href = url
+    })
 })
