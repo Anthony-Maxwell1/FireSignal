@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
     <title>FireSignal - Organization Portal</title>
 </head>
 <body>
     <div id="sign_in">
         <form name="organization_key">
-            <input name="key" class="key" type="">
-            <input class="button" type="submit">
+            <input name="key" class="key">
+            <button class="submit" type="submit">Sign In</button>
         </form>
     </div>
+
+    <div id="main" class="hidden">
+        <div class="container">
+            <div id="users" class="list">
+                <!-- Your list content here -->
+            </div>
+            <button class="new-account" onclick="create()">New Account</button>
+        </div>
+        <div class="account-controls">
+            <button class="acc-option">Delete Account</button>
+            <button class="acc-option">Edit Account</button>
+        </div>
+    </div>    
 </body>
 </html>

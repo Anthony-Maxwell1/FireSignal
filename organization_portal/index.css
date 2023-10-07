@@ -1,0 +1,105 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+#sign_in {
+    text-align: center;
+    background-color: blue;
+    border-radius: 30px;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+form {
+    display: inline-block;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.key {
+    height: 30px;
+}
+
+.submit {
+    height: 30px;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.user {
+    width: 95%;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: lightcyan;
+    color: black;
+    border-style: solid;
+    border-color: black;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+#main {
+    display: flex;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.new-account {
+    width: 100%;
+    height: 5%;
+}
+
+.account-controls {
+    width: 50%;
+    height: 100vh;
+}
+
+.acc-option {
+    width: 100%;
+    height: 5%;
+}
+
+.user.selected {
+    background-color: cyan;
+}
+
+.error {
+    width: 90%;
+    padding: 10px;
+    background-color: #ff00009c;
+    border-color: #ff0000;
+    box-shadow: 0px 0px 5px 5px #ff0000;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}

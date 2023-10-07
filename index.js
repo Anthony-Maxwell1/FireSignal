@@ -65,7 +65,7 @@ async function initMap() {
                 const marker = new google.maps.Marker({
                     position: position,
                     title: `Report Fire Here`,
-                    icon: { url: '../report_fire.svg', scaledSize: new google.maps.Size(30, 30) }
+                    icon: { url: 'report_fire.svg', scaledSize: new google.maps.Size(40, 40) }
                 });
                 infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(addFire);
@@ -77,7 +77,7 @@ async function initMap() {
             const marker = new google.maps.Marker({
                 position: userPos,
                 title: `User Position`,
-                icon: { url: '../user_position.svg', scaledSize: new google.maps.Size(50, 50) }
+                icon: { url: 'user_position.svg', scaledSize: new google.maps.Size(30, 30) }
             });
             marker.setMap(map);
         } catch (error) {
@@ -161,7 +161,7 @@ function makeMarker(loc, address) {
     const marker = new google.maps.Marker({
         position: loc,
         title: `Fire`,
-        icon: `fire.svg`
+        icon: { url: 'fire.svg', scaledSize: new google.maps.Size(50, 50) }
     });
 
     marker.setMap(map);

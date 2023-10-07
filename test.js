@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
-let saltRounds = 10;
-let password = 'TESTING';
-
+const saltRounds = 10;
+const password = 'ao9=2js/a2-s247'
 
 async function encrypt_password(password) {
     try {

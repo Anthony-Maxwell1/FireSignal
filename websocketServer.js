@@ -4,12 +4,17 @@ const { v4: uuidv4 } = require('uuid');
 const saltRounds = 10;
 const wss = new websocket.Server({ port: 8080 });
 const fs = require('fs');
-const { decode } = require('punycode');
 let currIndex = 0;
 let fires = 'fires.json';
 let hashes = 'logins.json';
 let data = JSON.parse(fs.readFileSync(fires));
-let sessions = {};
+let organizations = []
+for (var i in JSON.parse(fs.readFileSync('organizations.json'))) {
+    organizations.push(i)
+}
+let accounts = JSON.parse(fs.readFileSync('logins.json'))
+let FFSessions = {};
+let PSessions = {};
 
 wss.on('connection', (ws) => {
     console.log('A client connected.');
@@ -23,6 +28,7 @@ wss.on('connection', (ws) => {
 
         try {
             // Attempt to parse the message as JSON
+            console.log(message)
             const decodedMessage = JSON.parse(message);
 
             // Check if the parsed message is an object
@@ -30,7 +36,7 @@ wss.on('connection', (ws) => {
                 if (decodedMessage['type'] == 'report') {
                     currIndex += 1;
                     if (decodedMessage['client'] == 'firefighter') {
-                        if (sessions[ws] != undefined) {
+                        if (FFSessions[ws] != undefined) {
                             data[currIndex.toString()] = {'loc': decodedMessage['data'], 'verified': true};
                         }
                         
@@ -46,15 +52,17 @@ wss.on('connection', (ws) => {
                     if (decodedMessage['type'] == 'sign-in') {
                         console.log(decodedMessage['data']['username'], decodedMessage['data']['password'], decodedMessage['data']['organization'])
                         console.log(encrypt_password(decodedMessage['data']['password']))
-                        console.log('hello')
-                        if (await sign_in(decodedMessage['data']['username'], decodedMessage['data']['password'], decodedMessage['data']['organization']) == true) {
+                        res = await sign_in(decodedMessage['data']['username'], decodedMessage['data']['password'], decodedMessage['data']['organization'])
+                        if (res == true) {
                             let session = uuidv4()
-                            sessions[ws] = session
+                            FFSessions[ws] = session
                             ws.send(JSON.stringify({ 'type': 'sign_in-success', 'data': session }));
+                        } else if (res == 'deleted') {
+                            ws.send(JSON.stringify({ 'type': 'account_deleted' }))
                         } else {
                             ws.send(JSON.stringify({ 'type': 'sign_in-fail' }));
                         }
-                    } else if (sessions[ws] != undefined) {
+                    } else if (FFSessions[ws] != undefined) {
                         if (decodedMessage['type'] == 'verify') {
                             console.log(decodedMessage['data']['fire']);
                             for (let e in data) {
@@ -69,6 +77,29 @@ wss.on('connection', (ws) => {
                                 }
                             }
                             console.log(data);
+                        }
+                    }
+                } else if (decodedMessage['client'] == 'org-portal') {
+                    if (decodedMessage['type'] == 'sign-in') {
+                        console.log('abcdefghijklmnopqrstuvwxyz')
+                        let res = await org_sign_in(decodedMessage['data'])
+                        console.log(res[0])
+                        console.log(res[1])
+                        if (res[0] == true) {
+                            let session = uuidv4()
+                            PSessions[ws] = session
+                            let users = get_users(res[1])
+                            ws.send(JSON.stringify({ 'type': 'sign_in-success', 'data': { 'session': session, 'organization': res[1], 'users': users } }));
+                        } else {
+                            ws.send(JSON.stringify({ 'type': 'sign_in-fail' }));
+                        }
+                    } else if (PSessions[ws] != undefined) {
+                        console.log('abcdefgh')
+                        if (decodedMessage['type'] == 'acc-delete') {
+                            delete_account(decodedMessage['organization'], decodedMessage['data']['username'])
+                        } else if (decodedMessage['type'] == 'acc-create') {
+                            console.log('hello')
+                            create_account(decodedMessage['organization'], decodedMessage['data']['username'], decodedMessage['data']['password'])
                         }
                     }
                 }
@@ -88,7 +119,6 @@ wss.on('connection', (ws) => {
 
     ws.on('close', () => {
         console.log('A client disconnected.');
-
     });
 });
 
@@ -105,6 +135,7 @@ async function encrypt_password(password) {
 
 async function compare_password(password, hash, organization, username) {
     if (JSON.parse(fs.readFileSync(hashes))[organization + '/' + username] == undefined) { return false }
+    if (JSON.parse(fs.readFileSync(hashes))[organization + '/' + username] == 'deleted') { return 'deleted' }
 
     const passwordMatch = await bcrypt.compare(password, hash);
     return passwordMatch;
@@ -122,6 +153,45 @@ async function sign_in(username, password, organization) {
     return passwordMatch;
 }
 
+function get_users(organization) {
+    let org_accounts = []
+    for (i in accounts) {
+        if (i.split('/')[0] == organization) {
+            org_accounts.push(i)
+        }
+    }
+    return org_accounts
+}
+
+async function org_sign_in(key) {
+    for (const value of organizations) {
+        console.log(key);
+        console.log(value);
+        const res = await bcrypt.compare(key, value['key']);
+        console.log(res);
+        if (res === true) {
+            return [true, value['value']];
+        }
+    }
+    return [false, null];
+}
+
 function update() {
     data = JSON.parse(fs.readFileSync(fires))
+    accounts = JSON.parse(fs.readFileSync('logins.json'))
+    organizations = JSON.parse(fs.readFileSync('organizations.json'))
+}
+
+function delete_account(organization, account) {
+    update()
+    username = organization + '/' + account
+    accounts[username] = 'deleted'
+    fs.writeFileSync('logins.json', accounts)
+}
+
+async function create_account(organization, username, password) {
+    update()
+    const username_ = organization + '/' + username
+    accounts[username_] = await encrypt_password(password)
+    fs.writeFileSync('logins.json', JSON.stringify(accounts))
 }

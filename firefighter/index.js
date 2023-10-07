@@ -7,6 +7,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const dom_parser = new DOMParser();
 const err_empty = dom_parser.parseFromString('<div class="error">Username, Organization and Password cannot be blank.</div>', 'text/html').body.firstChild
 const err_invalid = dom_parser.parseFromString('<div class="error">Incorrect Username, Organization or Password.</div>', 'text/html').body.firstChild
+const err_deleted = dom_parser.parseFromString('<div class="error">Your account has been deleted. Please contact your organization manager for more information.</div>', 'text/html').body.firstChild
 const verifyButton = '<button class=`verify` onclick=verifyFire(<--fire-->)>TESTING</button>';
 let sessionID
 let map, userPos, currPos, lastMarker;
@@ -42,7 +43,6 @@ async function initMap() {
     try {
         map = new google.maps.Map(document.getElementById(`map`), { zoom: 8 });
 
-        // Promisify geolocation
         function getCurrentPosition() {
             return new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -68,7 +68,7 @@ async function initMap() {
                 const marker = new google.maps.Marker({
                     position: position,
                     title: `Report Fire Here`,
-                    icon: { url: '../report_fire.svg', scaledSize: new google.maps.Size(50, 50) }
+                    icon: { url: '../report_fire.svg', scaledSize: new google.maps.Size(40, 40) }
                 });
                 infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(addFire);
@@ -80,7 +80,7 @@ async function initMap() {
             const marker = new google.maps.Marker({
                 position: userPos,
                 title: `User Position`,
-                icon: { url: '../user_position.svg', scaledSize: new google.maps.Size(50, 50) }
+                icon: { url: '../user_position.svg', scaledSize: new google.maps.Size(30, 30) }
             });
             marker.setMap(map);
         } catch (error) {
@@ -163,6 +163,9 @@ async function initMap() {
             } else if (msg['type'] == `sign_in-fail`) {
                 document.getElementById('sign-in').classList.remove('hidden')
                 document.getElementById('sign-in').insertBefore(err_invalid, document.getElementById('sign-in').firstChild)
+            } else if (msg['type'] == 'account_deleted') {
+                document.getElementById('sign-in').classList.remove('hidden')
+                document.getElementById('sign-in').insertBefore(err_deleted, document.getElementById('sign-in').firstChild)
             }
         }
     } catch {
@@ -236,7 +239,7 @@ function closeDropdownOnUnfocus(event) {
 function loadOrganizations() {
     var dropdown = document.getElementById("organization");
 
-    fetch("organizations.json")
+    fetch("../organizations.json")
         .then(response => response.json())
         .then(data => {
             data.forEach(item => {
@@ -303,7 +306,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 })
 
 $(document).ready(function() {
-    $.getJSON("organizations.json", function(data) {
+    $.getJSON("../organizations.json", function(data) {
         $.each(data, function(index, item) {
             $('#organization').append(new Option(item.label, item.value, false, false));
         });
