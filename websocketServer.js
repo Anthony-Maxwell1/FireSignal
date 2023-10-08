@@ -94,12 +94,15 @@ wss.on('connection', (ws) => {
                             ws.send(JSON.stringify({ 'type': 'sign_in-fail' }));
                         }
                     } else if (PSessions[ws] != undefined) {
-                        console.log('abcdefgh')
                         if (decodedMessage['type'] == 'acc-delete') {
                             delete_account(decodedMessage['organization'], decodedMessage['data']['username'])
                         } else if (decodedMessage['type'] == 'acc-create') {
-                            console.log('hello')
                             create_account(decodedMessage['organization'], decodedMessage['data']['username'], decodedMessage['data']['password'])
+                        } else if (decodedMessage['type'] == 'acc-edit') {
+                            delete_account(decodedMessage['organization'], decodedMessage['data']['username'])
+                            create_account(decodedMessage['organization'], decodedMessage['data']['newUsername'], decodedMessage['data']['newPassword'])
+                        } else if (decodedMessage['type'] == 'fetchInfo') {
+                            ws.send(JSON.stringify({'type': 'fetched-info', 'data': accounts[decodedMessage['data']]}))
                         }
                     }
                 }

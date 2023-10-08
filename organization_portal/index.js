@@ -71,7 +71,7 @@ function create() {
     window.location = newURL
 }
 
-function acc_delete() {
+function delete_acc() {
     if (selectedButton == null) {
         document.getElementById('account-controls').appendChild(err_select)
     } else {
