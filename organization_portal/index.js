@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const dom_parser = new DOMParser();
 const err_invalid = dom_parser.parseFromString('<div class="error">Incorrect Key.</div>', 'text/html').body.firstChild
 const err_select = dom_parser.parseFromString('<div class="error">Select a user first.</div>', 'text/html').body.firstChild
+const err_empty = dom_parser.parseFromString('<div class="error">Username and Password can not be empty.</div>', 'text/html').body.firstChild
 let sessionID, organization
 let selectedButton = null;
 
@@ -24,7 +25,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     socket.onmessage = function (event) {
         msg = JSON.parse(event.data);
         if (msg['type'] == 'sign_in-success') {
-            console.log('hi')
             document.getElementById('sign_in').remove()
             document.getElementById('main').classList.remove('hidden')
             sessionID = msg['data']['session']
@@ -39,9 +39,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     if (selectedButton !== user) {
                         if (selectedButton) {
                             selectedButton.classList.remove('selected');
+                        } else {
+                            document.getElementById('newUsername').disabled = false
+                            document.getElementById('newPassword').disabled = false
                         }
 
                         selectedButton = user;
+
+                        document.getElementById('newUsername').value = user.innerText
 
                         user.classList.add('selected');
                     }
@@ -76,5 +81,15 @@ function delete_acc() {
         document.getElementById('account-controls').appendChild(err_select)
     } else {
         socket.send(JSON.stringify({'client': 'org-portal', 'organization': msg['data']['organization'], 'type': 'acc-delete', 'data': selectedButton.innerText}))
+    }
+}
+
+function edit() {
+    if (selectedButton == null) {
+        document.getElementById('account-controls').appendChild(err_select)
+    } else if (document.getElementById('newUsername') != '' & document.getElementById('newPassword') != '') {
+        socket.send(JSON.stringify({'client': 'org-portal', 'organization': msg['data']['organization'], 'type': 'acc-edit', 'data': {'username': selectedButton.innerText, 'newUsername': document.getElementById('newUsername').value, 'newPassword': document.getElementById('newPassword').value}}))
+    } else {
+        document.getElementById('account-controls').appendChild(err_empty)
     }
 }

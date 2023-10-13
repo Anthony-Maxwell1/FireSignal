@@ -68,10 +68,7 @@ wss.on('connection', (ws) => {
                             for (let e in data) {
                                 console.log(data[e]);
                                 
-                                if (
-                                    data[e].loc === decodedMessage['data']['fire'].loc &&
-                                    data[e].verified === decodedMessage['data']['fire'].verified
-                                ) {
+                                if (data[e].loc === decodedMessage['data']['fire'].loc && data[e].verified === decodedMessage['data']['fire'].verified) {
                                     data[e]['verified'] = true;
                                     fs.writeFileSync(fires, JSON.stringify(data, null, 2), 'utf-8');
                                 }
@@ -95,14 +92,13 @@ wss.on('connection', (ws) => {
                         }
                     } else if (PSessions[ws] != undefined) {
                         if (decodedMessage['type'] == 'acc-delete') {
-                            delete_account(decodedMessage['organization'], decodedMessage['data']['username'])
+                            console.log('hello')
+                            delete_account(decodedMessage['organization'], decodedMessage['data'])
                         } else if (decodedMessage['type'] == 'acc-create') {
                             create_account(decodedMessage['organization'], decodedMessage['data']['username'], decodedMessage['data']['password'])
                         } else if (decodedMessage['type'] == 'acc-edit') {
-                            delete_account(decodedMessage['organization'], decodedMessage['data']['username'])
+                            accounts[decodedMessage['data']['username']] = undefined
                             create_account(decodedMessage['organization'], decodedMessage['data']['newUsername'], decodedMessage['data']['newPassword'])
-                        } else if (decodedMessage['type'] == 'fetchInfo') {
-                            ws.send(JSON.stringify({'type': 'fetched-info', 'data': accounts[decodedMessage['data']]}))
                         }
                     }
                 }
@@ -159,7 +155,8 @@ async function sign_in(username, password, organization) {
 function get_users(organization) {
     let org_accounts = []
     for (i in accounts) {
-        if (i.split('/')[0] == organization) {
+        if (i.split('/')[0] == organization && accounts[i] != 'deleted') {
+            console.log(accounts[i])
             org_accounts.push(i)
         }
     }
@@ -187,9 +184,12 @@ function update() {
 
 function delete_account(organization, account) {
     update()
+    console.log('hello1.9')
     username = organization + '/' + account
+    console.log(username)
     accounts[username] = 'deleted'
-    fs.writeFileSync('logins.json', accounts)
+    console.log(accounts[username])
+    fs.writeFileSync('logins.json', JSON.stringify(accounts))
 }
 
 async function create_account(organization, username, password) {

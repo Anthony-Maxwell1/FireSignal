@@ -41,7 +41,7 @@ async function initMap() {
                 const marker = new google.maps.Marker({
                     position: position,
                     title: `Report Fire Here`,
-                    icon: { url: 'report_fire.svg', scaledSize: new google.maps.Size(40, 40) }
+                    icon: { url: '../report_fire.svg', scaledSize: new google.maps.Size(40, 40) }
                 });
                 infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(addFire);
@@ -53,7 +53,7 @@ async function initMap() {
             const marker = new google.maps.Marker({
                 position: userPos,
                 title: `User Position`,
-                icon: { url: 'user_position.svg', scaledSize: new google.maps.Size(30, 30) }
+                icon: { url: '../user_position.svg', scaledSize: new google.maps.Size(30, 30) }
             });
             marker.setMap(map);
         } catch (error) {
@@ -135,7 +135,7 @@ function makeMarker(loc, address) {
     const marker = new google.maps.Marker({
         position: loc,
         title: `Fire`,
-        icon: { url: 'fire.svg', scaledSize: new google.maps.Size(50, 50) }
+        icon: { url: '../fire.svg', scaledSize: new google.maps.Size(50, 50) }
     });
 
     marker.setMap(map);
@@ -160,78 +160,65 @@ function listView() {
     document.getElementById('main').classList.add('hidden')
 }
 
-function toggleOptions() {
-    var dropdownContent = document.getElementById("dropdown-content");
-    if (dropdownContent.classList.contains("active")) {
-        dropdownContent.classList.remove("active");
-        document.removeEventListener("click", closeDropdownOnUnfocus);
-    } else {
-        dropdownContent.classList.add("active");
-        document.addEventListener("click", closeDropdownOnUnfocus);
-    }
-}
-
-function closeDropdownOnUnfocus(event) {
-    var dropdownContent = document.getElementById("dropdown-content");
-    var optionsButton = document.getElementById("options");
-    if (!dropdownContent.contains(event.target) && event.target !== optionsButton) {
-        dropdownContent.classList.remove("active");
-        document.removeEventListener("click", closeDropdownOnUnfocus);
-    }
-}
-
 function swapPalette(paletteNo) {
     for (var_ in palettes[paletteNo]) {
         document.documentElement.style.setProperty(var_, palettes[paletteNo][var_])
     }
 }
 
-const animateTrailer = (e, interacting) => {
-    const x = e.clientX - trailer.offsetWidth / 2,
-          y = e.clientY - trailer.offsetHeight / 2;
-    
-    const keyframes = {
-        transform: `translate(${x}px, ${y}px) scale(${interacting ? 8 : 1})`
-    }
-    
-    trailer.animate(keyframes, { 
-        duration: 800, 
-        fill: "forwards" 
-    });
+function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.style.bottom = menu.style.bottom === '0%' ? '-78%' : '0%';
 }
 
-const getTrailerClass = type => {
-    switch(type) {
-        case 'listView':
-            return "fa-solid fa-rectangle-list"
-        case 'mapView':
-            return "fa-solid fa-map"
-        case 'options':
-            return "fa-solid fa-list-ul"
-        case 'colour-palette':
-            return "fa-solid fa-palette"
-        default:
-            return "fa-solid fa-link"; 
+function isDescendant(parent, child) {
+    let node = child.parentNode;
+    while (node != null) {
+        if (node === parent) {
+            return true;
+        }
+        node = node.parentNode;
     }
+    return false;
 }
+
+function closeMenu() {
+    const menu = document.querySelector('.menu');
+    menu.style.bottom = '-78%';
+}
+
+document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.menu');
+    const target = event.target;
+    
+    if (!isDescendant(menu, target)) {
+        closeMenu();
+    }
+});
+
+const button = document.getElementById('menu-toggle');
+
+let startX, startY;
+
+button.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+
+button.addEventListener('touchend', function(e) {
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const distanceX = endX - startX;
+    const distanceY = endY - startY;
+    
+    const threshold = 50;
+    
+    if (Math.abs(distanceX) > threshold || Math.abs(distanceY) > threshold) {
+        toggleMenu()
+    }
+});
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    const trailer = document.getElementById("trailer")
-    window.onmousemove = e => {
-        const interactable = e.target.closest(".interactable"),
-              interacting = interactable !== null
-        
-        const icon = document.getElementById("trailer-icon")
-        
-        animateTrailer(e, interacting)
-        
-        trailer.dataset.type = interacting ? interactable.dataset.type : ""
-        
-        if (interacting) {
-            icon.className = getTrailerClass(interactable.dataset.type)
-        }
-    }
-
     document.getElementById('showUnverified').addEventListener('input', (event) => {
         let url = window.location.href;
         if (urlParams.has('showUnverified')) {
