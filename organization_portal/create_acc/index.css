@@ -1,0 +1,61 @@
+.error {
+    width: 90%;
+    padding: 10px;
+    background-color: #ff00009c;
+    border-color: #ff0000;
+    box-shadow: 0px 0px 5px 5px #ff0000;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.create_acc {
+    background-color: cornflowerblue;
+    filter: drop-shadow(0px 16px 7px #7eaee2);
+    border-radius: 40px;
+    position: absolute;
+    width: 30%;
+    height: 10%;
+    left: 50%;
+    top: 50%;
+    padding: 50px;
+    transform: translate(-50%, -50%);
+}
+
+form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.submit, input {
+    height: 33.33%;
+}
+
+.back {
+    position: fixed;
+    top: 90%;
+    left: 1%;
+    width: 4.5%;
+    height: 4.5vw;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    -moz-osx-font-smoothing: grayscale;
+
+    font-feature-settings: 'liga';
+}

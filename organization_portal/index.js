@@ -82,6 +82,7 @@ function delete_acc() {
     } else {
         socket.send(JSON.stringify({'client': 'org-portal', 'organization': msg['data']['organization'], 'type': 'acc-delete', 'data': selectedButton.innerText}))
     }
+    window.location.reload()
 }
 
 function edit() {
