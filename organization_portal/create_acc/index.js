@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         formData.forEach(function (value, key) {
             updatedParams += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(value);
         });
-        
-        history.pushState(null, null, window.location.pathname + updatedParams);
+
+        window.location.href = window.location.pathname + updatedParams;
     });
     
     socket = new WebSocket(`ws://localhost:8080`);
@@ -78,3 +78,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 })
+
+function back() {
+    var urlSearchParams = new URLSearchParams(window.location.search);
+    
+    var params = '?' + urlSearchParams.toString();
+    
+    window.location.href = 'http://localhost:3000/organization_portal/' + params
+}
