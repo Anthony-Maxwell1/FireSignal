@@ -17,15 +17,17 @@
 
     <div id="main" class="hidden">
         <div class="container">
-            <div id="users" class="list">
-            </div>
-            <button class="new-account" onclick="create()">New Account</button>
+            <div id="users" class="list"></div>
+            <button class="acc-option" onclick="create()">New Account</button>
         </div>
         <div class="account-controls">
             <button class="acc-option" onclick="delete_acc()">Delete Account</button>
-            <input class="input" id="newUsername" placeholder="New Username" disabled>
-            <input class="input" id="newPassword" placeholder="New Password" disabled>
-            <button class="acc-option" onclick="edit()">Edit Account</button>
+
+            <div class="edit_acc">
+                <input class="input" id="newUsername" placeholder="New Username" disabled>
+                <input class="input" id="newPassword" placeholder="New Password" disabled>
+                <button class="edit_submit" onclick="edit()">Edit Account</button>
+            </div>
         </div>
     </div>
 </body>
