@@ -288,6 +288,8 @@ const getTrailerClass = type => {
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
+    document.body.lastElementChild.remove()
+    document.body.lastElementChild.remove()
     const trailer = document.getElementById("trailer")
     window.onmousemove = e => {
         const interactable = e.target.closest(".interactable"),

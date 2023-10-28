@@ -7,6 +7,8 @@ let sessionID, organization
 let selectedButton = null;
 
 window.addEventListener('DOMContentLoaded', (event) => {
+    document.body.lastElementChild.remove()
+    document.body.lastElementChild.remove()
     socket = new WebSocket(`ws://localhost:8080`);
 
     socket.onopen = function (event) {

@@ -219,6 +219,8 @@ button.addEventListener('touchend', function(e) {
 });
 
 window.addEventListener("DOMContentLoaded", (event) => {
+    document.body.lastElementChild.remove()
+    document.body.lastElementChild.remove()
     document.getElementById('showUnverified').addEventListener('input', (event) => {
         let url = window.location.href;
         if (urlParams.has('showUnverified')) {

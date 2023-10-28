@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		92DB22112AEBA09D00356308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB22102AEBA09D00356308 /* AppDelegate.swift */; };
+		92DB22132AEBA09D00356308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB22122AEBA09D00356308 /* SceneDelegate.swift */; };
+		92DB22152AEBA09D00356308 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB22142AEBA09D00356308 /* ViewController.swift */; };
+		92DB22182AEBA09D00356308 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DB22162AEBA09D00356308 /* Main.storyboard */; };
+		92DB221A2AEBA09F00356308 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DB22192AEBA09F00356308 /* Assets.xcassets */; };
+		92DB221D2AEBA09F00356308 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DB221B2AEBA09F00356308 /* LaunchScreen.storyboard */; };
+		92DB22282AEBA09F00356308 /* FireSignalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB22272AEBA09F00356308 /* FireSignalTests.swift */; };
+		92DB22322AEBA09F00356308 /* FireSignalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB22312AEBA09F00356308 /* FireSignalUITests.swift */; };
+		92DB22342AEBA09F00356308 /* FireSignalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB22332AEBA09F00356308 /* FireSignalUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		92DB22242AEBA09F00356308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92DB22052AEBA09D00356308 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92DB220C2AEBA09D00356308;
+			remoteInfo = FireSignal;
+		};
+		92DB222E2AEBA09F00356308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92DB22052AEBA09D00356308 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92DB220C2AEBA09D00356308;
+			remoteInfo = FireSignal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		92DB220D2AEBA09D00356308 /* FireSignal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireSignal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DB22102AEBA09D00356308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		92DB22122AEBA09D00356308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		92DB22142AEBA09D00356308 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		92DB22172AEBA09D00356308 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		92DB22192AEBA09F00356308 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92DB221C2AEBA09F00356308 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		92DB221E2AEBA09F00356308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92DB22232AEBA09F00356308 /* FireSignalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FireSignalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DB22272AEBA09F00356308 /* FireSignalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSignalTests.swift; sourceTree = "<group>"; };
+		92DB222D2AEBA09F00356308 /* FireSignalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FireSignalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DB22312AEBA09F00356308 /* FireSignalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSignalUITests.swift; sourceTree = "<group>"; };
+		92DB22332AEBA09F00356308 /* FireSignalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSignalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		92DB220A2AEBA09D00356308 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DB22202AEBA09F00356308 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DB222A2AEBA09F00356308 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		92DB22042AEBA09D00356308 = {
+			isa = PBXGroup;
+			children = (
+				92DB220F2AEBA09D00356308 /* FireSignal */,
+				92DB22262AEBA09F00356308 /* FireSignalTests */,
+				92DB22302AEBA09F00356308 /* FireSignalUITests */,
+				92DB220E2AEBA09D00356308 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		92DB220E2AEBA09D00356308 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92DB220D2AEBA09D00356308 /* FireSignal.app */,
+				92DB22232AEBA09F00356308 /* FireSignalTests.xctest */,
+				92DB222D2AEBA09F00356308 /* FireSignalUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92DB220F2AEBA09D00356308 /* FireSignal */ = {
+			isa = PBXGroup;
+			children = (
+				92DB22102AEBA09D00356308 /* AppDelegate.swift */,
+				92DB22122AEBA09D00356308 /* SceneDelegate.swift */,
+				92DB22142AEBA09D00356308 /* ViewController.swift */,
+				92DB22162AEBA09D00356308 /* Main.storyboard */,
+				92DB22192AEBA09F00356308 /* Assets.xcassets */,
+				92DB221B2AEBA09F00356308 /* LaunchScreen.storyboard */,
+				92DB221E2AEBA09F00356308 /* Info.plist */,
+			);
+			path = FireSignal;
+			sourceTree = "<group>";
+		};
+		92DB22262AEBA09F00356308 /* FireSignalTests */ = {
+			isa = PBXGroup;
+			children = (
+				92DB22272AEBA09F00356308 /* FireSignalTests.swift */,
+			);
+			path = FireSignalTests;
+			sourceTree = "<group>";
+		};
+		92DB22302AEBA09F00356308 /* FireSignalUITests */ = {
+			isa = PBXGroup;
+			children = (
+				92DB22312AEBA09F00356308 /* FireSignalUITests.swift */,
+				92DB22332AEBA09F00356308 /* FireSignalUITestsLaunchTests.swift */,
+			);
+			path = FireSignalUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		92DB220C2AEBA09D00356308 /* FireSignal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92DB22372AEBA09F00356308 /* Build configuration list for PBXNativeTarget "FireSignal" */;
+			buildPhases = (
+				92DB22092AEBA09D00356308 /* Sources */,
+				92DB220A2AEBA09D00356308 /* Frameworks */,
+				92DB220B2AEBA09D00356308 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FireSignal;
+			productName = FireSignal;
+			productReference = 92DB220D2AEBA09D00356308 /* FireSignal.app */;
+			productType = "com.apple.product-type.application";
+		};
+		92DB22222AEBA09F00356308 /* FireSignalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92DB223A2AEBA09F00356308 /* Build configuration list for PBXNativeTarget "FireSignalTests" */;
+			buildPhases = (
+				92DB221F2AEBA09F00356308 /* Sources */,
+				92DB22202AEBA09F00356308 /* Frameworks */,
+				92DB22212AEBA09F00356308 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92DB22252AEBA09F00356308 /* PBXTargetDependency */,
+			);
+			name = FireSignalTests;
+			productName = FireSignalTests;
+			productReference = 92DB22232AEBA09F00356308 /* FireSignalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		92DB222C2AEBA09F00356308 /* FireSignalUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92DB223D2AEBA09F00356308 /* Build configuration list for PBXNativeTarget "FireSignalUITests" */;
+			buildPhases = (
+				92DB22292AEBA09F00356308 /* Sources */,
+				92DB222A2AEBA09F00356308 /* Frameworks */,
+				92DB222B2AEBA09F00356308 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92DB222F2AEBA09F00356308 /* PBXTargetDependency */,
+			);
+			name = FireSignalUITests;
+			productName = FireSignalUITests;
+			productReference = 92DB222D2AEBA09F00356308 /* FireSignalUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		92DB22052AEBA09D00356308 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					92DB220C2AEBA09D00356308 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					92DB22222AEBA09F00356308 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 92DB220C2AEBA09D00356308;
+					};
+					92DB222C2AEBA09F00356308 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 92DB220C2AEBA09D00356308;
+					};
+				};
+			};
+			buildConfigurationList = 92DB22082AEBA09D00356308 /* Build configuration list for PBXProject "FireSignal" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 92DB22042AEBA09D00356308;
+			productRefGroup = 92DB220E2AEBA09D00356308 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92DB220C2AEBA09D00356308 /* FireSignal */,
+				92DB22222AEBA09F00356308 /* FireSignalTests */,
+				92DB222C2AEBA09F00356308 /* FireSignalUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92DB220B2AEBA09D00356308 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DB221D2AEBA09F00356308 /* LaunchScreen.storyboard in Resources */,
+				92DB221A2AEBA09F00356308 /* Assets.xcassets in Resources */,
+				92DB22182AEBA09D00356308 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DB22212AEBA09F00356308 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DB222B2AEBA09F00356308 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		92DB22092AEBA09D00356308 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DB22152AEBA09D00356308 /* ViewController.swift in Sources */,
+				92DB22112AEBA09D00356308 /* AppDelegate.swift in Sources */,
+				92DB22132AEBA09D00356308 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DB221F2AEBA09F00356308 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DB22282AEBA09F00356308 /* FireSignalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DB22292AEBA09F00356308 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DB22342AEBA09F00356308 /* FireSignalUITestsLaunchTests.swift in Sources */,
+				92DB22322AEBA09F00356308 /* FireSignalUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		92DB22252AEBA09F00356308 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92DB220C2AEBA09D00356308 /* FireSignal */;
+			targetProxy = 92DB22242AEBA09F00356308 /* PBXContainerItemProxy */;
+		};
+		92DB222F2AEBA09F00356308 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92DB220C2AEBA09D00356308 /* FireSignal */;
+			targetProxy = 92DB222E2AEBA09F00356308 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		92DB22162AEBA09D00356308 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92DB22172AEBA09D00356308 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		92DB221B2AEBA09F00356308 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92DB221C2AEBA09F00356308 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		92DB22352AEBA09F00356308 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		92DB22362AEBA09F00356308 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		92DB22382AEBA09F00356308 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FireSignal/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.cytech.FireSignal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92DB22392AEBA09F00356308 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FireSignal/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.cytech.FireSignal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		92DB223B2AEBA09F00356308 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.cytech.FireSignalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FireSignal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FireSignal";
+			};
+			name = Debug;
+		};
+		92DB223C2AEBA09F00356308 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.cytech.FireSignalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FireSignal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FireSignal";
+			};
+			name = Release;
+		};
+		92DB223E2AEBA09F00356308 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.cytech.FireSignalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FireSignal;
+			};
+			name = Debug;
+		};
+		92DB223F2AEBA09F00356308 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.cytech.FireSignalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FireSignal;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92DB22082AEBA09D00356308 /* Build configuration list for PBXProject "FireSignal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DB22352AEBA09F00356308 /* Debug */,
+				92DB22362AEBA09F00356308 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92DB22372AEBA09F00356308 /* Build configuration list for PBXNativeTarget "FireSignal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DB22382AEBA09F00356308 /* Debug */,
+				92DB22392AEBA09F00356308 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92DB223A2AEBA09F00356308 /* Build configuration list for PBXNativeTarget "FireSignalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DB223B2AEBA09F00356308 /* Debug */,
+				92DB223C2AEBA09F00356308 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92DB223D2AEBA09F00356308 /* Build configuration list for PBXNativeTarget "FireSignalUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DB223E2AEBA09F00356308 /* Debug */,
+				92DB223F2AEBA09F00356308 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92DB22052AEBA09D00356308 /* Project object */;
+}

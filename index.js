@@ -14,7 +14,6 @@ async function initMap() {
     try {
         map = new google.maps.Map(document.getElementById(`map`), { zoom: 8 });
 
-        // Promisify geolocation
         function getCurrentPosition() {
             return new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -22,7 +21,6 @@ async function initMap() {
         }
 
         try {
-            // Get user's position
             const position = await getCurrentPosition();
             userPos = { 'lat': position.coords.latitude, 'lng': position.coords.longitude };
             console.log(userPos);
@@ -216,6 +214,8 @@ const getTrailerClass = type => {
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
+    document.body.lastElementChild.remove()
+    document.body.lastElementChild.remove()
     const trailer = document.getElementById("trailer")
     window.onmousemove = e => {
         const interactable = e.target.closest(".interactable"),
