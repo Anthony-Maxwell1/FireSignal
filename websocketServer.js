@@ -27,11 +27,9 @@ wss.on('connection', (ws) => {
         console.log('Received message:', message);
 
         try {
-            // Attempt to parse the message as JSON
             console.log(message)
             const decodedMessage = JSON.parse(message);
 
-            // Check if the parsed message is an object
             if (typeof decodedMessage === 'object' && decodedMessage !== null) {
                 if (decodedMessage['type'] == 'report') {
                     currIndex += 1;
@@ -78,7 +76,6 @@ wss.on('connection', (ws) => {
                     }
                 } else if (decodedMessage['client'] == 'org-portal') {
                     if (decodedMessage['type'] == 'sign-in') {
-                        console.log('abcdefghijklmnopqrstuvwxyz')
                         let res = await org_sign_in(decodedMessage['data'])
                         console.log(res[0])
                         console.log(res[1])
