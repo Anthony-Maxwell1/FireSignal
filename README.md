@@ -1,8 +1,5 @@
 # FireSignal
 
-Made by Jarn Inventions,
-Supported by UpStep Industries.
-
 ## What is FireSignal?
 
 Firesignal is an application where users can report fires which will help fire departments locate fires and the community avoid the fires.
