@@ -1,3 +1,6 @@
+> [!INFO]
+> This repository is here from my early stages when learning to code. It is here to help others learn from it.
+
 # FireSignal
 
 ## What is FireSignal?
